@@ -1,0 +1,52 @@
+\documentclass[10pt]{article}
+\usepackage{AndromedaHomework}
+
+\begin{document}
+    \section{Annulus Volume}
+    Given two cylindrical annuli of densities $\rho_1$ and$\rho_2$ respectively, shared mass $m$ and outer radius $R$, find inner radii $r_1$ and $r_2$ so that each have the same mass. 
+    \fig{annulus.png}{Cylindrical annulus}{3}
+    We can calculate the volume as a difference between the volumes of a large cylinder ($R$) and small cylinder ($r$).
+    \begin{displaymath}
+        V = \pi R^2h-\pi r^2h
+    \end{displaymath}
+    The mass is then
+    \begin{displaymath}
+        m = \pi h(R^2-r^2)\rho_{Cu}
+    \end{displaymath}
+    If we include the aluminium pin as part of the mass,
+    \begin{displaymath}
+        m = \pi (R_o^2-R_{i}^2)H\rho_{Cu}+\pi(R_i^2)\frac{2}{3}H\rho_{Al6061}
+    \end{displaymath} 
+    Solving within Sympy for the inner radius,
+    \begin{displaymath}
+        R_i = \sqrt{\frac{3}{\pi}}\sqrt{\frac{m-\pi H\rho_{Cu}R_o^2}{H(2\rho_{Al}-3\rho_{Cu})}}
+    \end{displaymath}
+    \subsection{Experimental calculations}
+    Determining mass of the copper annulus:
+    \begin{itemize}
+        \item $H=0.300\unt{in}=0.007620\unt{m}$
+        \item $R_{o,Cu}=0.275\unt{in}=0.006985\unt{m}$
+        \item $R_{i,Cu} = 0.125\unt{in}=0.003175\unt{m}$
+        \item $\rho_{Cu} = 8940\unt{kg/m}^3$
+        \item $\rho_{Nb} = 8570\unt{kg/m}^3$
+        \item $\rho_{Al} = 2700\unt{kg/m}^3$
+    \end{itemize}
+    The mass of the test body and the aluminium pin is then
+    \begin{displaymath}
+        m_{Cu} = \pi(0.006985^2-0.003175^2)*0.007620*8940+\pi*0.003175^2*\frac{2}{3}*0.007620*2700 = 0.008719\unt{kg}
+    \end{displaymath}
+    Testing to confirm our algebra was right for $R_i$,
+    \begin{align}
+        r = \sqrt{\frac{3m-3\pi R_o^2H\rho_{Cu}}{\pi H(2\rho_{Al}-3\rho_{Cu})}}\\
+        r = \sqrt{\frac{3(0.01039)-3\pi 0.006985^2(0.007620)(8940)}{\pi 0.006985(2(2700)-3(8940))}}\\
+        r = 0.003175
+    \end{align}
+    Determining the inner radius of the niobium annulus uses this mass as found in (3) above.
+    \begin{displaymath}
+        R_{i,Nb} = 0.002822\unt{m}
+    \end{displaymath}
+    If we use a variable outer radius, inner radius held at $0.003175\unt{m}$,
+    \begin{displaymath}
+        R_{o,Nb} = 0.007104\unt{m}
+    \end{displaymath}
+\end{document}
